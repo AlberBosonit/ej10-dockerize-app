@@ -1,0 +1,9 @@
+Creo una red llamada mynetwork:
+docker network create mynetwork
+
+docker run -d --network mynetwork --name postgrestest --restart always -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=contrasena -e POSTGRES_DB=test -e DATABASE_HOST=127.0.0.1 -p 5432:5432 postgres:latest
+
+Estando en  ~/Desktop/Spring/ej10-dockerize-app , hacer:
+docker build -t springboot .     EL PUNTO INCLUIDO!!!!! NO DESDE TARGET!
+
+docker run --network=mynetwork --name mispringboot -p 8090:8090 -e SPRING.DATASOURCE.URL=jdbc:postgresql://postgrestest:5432/test springboot
